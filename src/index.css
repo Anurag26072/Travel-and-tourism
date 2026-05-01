@@ -1,0 +1,142 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-primary: #fdf8f0;
+    --bg-secondary: #f4ede0;
+    --text-primary: #1a1208;
+    --text-secondary: #5c4a2a;
+    --accent: #d98c30;
+    --accent-ocean: #1ca0be;
+    --border: rgba(217, 140, 48, 0.2);
+  }
+
+  .dark {
+    --bg-primary: #0a0f1a;
+    --bg-secondary: #111827;
+    --text-primary: #f0ede8;
+    --text-secondary: #9ca3af;
+    --accent: #e3a44e;
+    --accent-ocean: #38bdd8;
+    --border: rgba(227, 164, 78, 0.15);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border-radius: 3px;
+  }
+}
+
+@layer components {
+  .card-hover {
+    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-xl;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-5 py-2.5 rounded-full font-medium text-sm
+           bg-sand-500 text-white hover:bg-sand-600 transition-all duration-200
+           active:scale-95 shadow-sm hover:shadow-md;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center gap-2 px-5 py-2.5 rounded-full font-medium text-sm
+           border border-sand-400 text-sand-600 hover:bg-sand-50 transition-all duration-200
+           dark:text-sand-400 dark:border-sand-500 dark:hover:bg-sand-900/20 active:scale-95;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-full font-medium text-sm
+           text-gray-600 hover:text-sand-600 hover:bg-sand-50 transition-all duration-200
+           dark:text-gray-400 dark:hover:text-sand-400 dark:hover:bg-sand-900/20;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-3 rounded-xl border border-sand-200 bg-white/80
+           text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2
+           focus:ring-sand-400 focus:border-transparent transition-all duration-200
+           dark:bg-gray-800/80 dark:border-gray-700 dark:text-gray-200
+           dark:placeholder-gray-500 dark:focus:ring-ocean-500;
+  }
+
+  .section-title {
+    @apply font-display text-3xl md:text-4xl font-bold text-gray-900 dark:text-white;
+  }
+
+  .badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium;
+  }
+
+  .glass {
+    @apply bg-white/70 dark:bg-gray-900/70 backdrop-blur-md border border-white/20 dark:border-gray-700/30;
+  }
+}
+
+/* Custom animations */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
+.stagger-6 { animation-delay: 0.6s; }
+
+.animate-fade-up {
+  animation: fadeUp 0.6s ease forwards;
+  opacity: 0;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.shimmer {
+  background: linear-gradient(90deg, transparent 25%, rgba(255,255,255,0.3) 50%, transparent 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Hero gradient */
+.hero-gradient {
+  background: linear-gradient(135deg, #1a0a00 0%, #2d1a08 40%, #0f2535 100%);
+}
+
+/* Grain overlay */
+.grain::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.04;
+}
